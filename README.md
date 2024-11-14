@@ -11,12 +11,6 @@ This is a Django-based backend application designed to work with a frontend. The
 - [Running the Project](#running-the-project)
   - [Running Locally](#running-locally)
   - [Running with Docker](#running-with-docker)
-- [Deployment](#deployment)
-- [API Endpoints](#api-endpoints)
-- [Security and Best Practices](#security-and-best-practices)
-- [License](#license)
-- [Contributing](#contributing)
-- [Contact](#contact)
 
 ---
 
