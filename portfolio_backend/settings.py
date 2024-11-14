@@ -34,6 +34,12 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'  # Convert to boolean if needed
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
+
+if not ALLOWED_HOSTS or ALLOWED_HOSTS == ['']:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+elif '127.0.0.1' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.extend(['127.0.0.1', 'localhost'])
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://localhost:4200',
@@ -41,7 +47,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-# Application definition
+
 
 
 INSTALLED_APPS = [
