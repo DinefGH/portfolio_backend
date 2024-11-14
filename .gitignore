@@ -44,6 +44,5 @@ logs/
 .DS_Store
 
 # Docker files
-**/Dockerfile
 docker-compose.yml
 *.pid
