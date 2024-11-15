@@ -23,17 +23,19 @@ def increment_visit(request):
     Returns a JSON response containing the updated visit count and the timestamp of the visit.
     """
 
-    visit = Visit.objects.create()
+    try:
+        visit = Visit.objects.create()
+        visit_count, _ = VisitCount.objects.get_or_create(pk=1)
+        visit_count.count = F('count') + 1
+        visit_count.save()
+        visit_count.refresh_from_db()
+        visit_timestamp_str = localtime(visit.timestamp).isoformat()
 
-    visit_count, _ = VisitCount.objects.get_or_create(pk=1)
-    visit_count.count = F('count') + 1
-    visit_count.save()
-    visit_count.refresh_from_db()
-    visit_timestamp_str = localtime(visit.timestamp).isoformat()
-
-
-    return Response({
-        'message': 'Visit count incremented',
-        'count': visit_count.count,
-        'visit_timestamp': visit_timestamp_str,
-    }, status=200)
+        return Response({
+            'message': 'Visit count incremented',
+            'count': visit_count.count,
+            'visit_timestamp': visit_timestamp_str,
+        }, status=200)
+    except Exception as e:
+        # Optionally log the error
+        return Response({'error': str(e)}, status=500)

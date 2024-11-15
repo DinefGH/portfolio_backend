@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure--1b3r5_(qx=%9to7zw&4pn026_pt7d)+)4f56^iyp!p-_-@(0w
 SECRET_KEY = os.getenv('SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'  # Convert to boolean if needed
+DEBUG = True
 
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
@@ -61,6 +61,17 @@ INSTALLED_APPS = [
     'counter.apps.CounterConfig',
     'rest_framework',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
+
 
 
 MIDDLEWARE = [
