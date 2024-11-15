@@ -64,14 +64,6 @@ INSTALLED_APPS = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-}
 
 
 
@@ -90,14 +82,19 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'portfolio_backend.urls'
 
 
+
+
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 
+CSRF_COOKIE_DOMAIN = os.getenv('CSRF_COOKIE_DOMAIN', '').split(',')
+
+
 CSRF_COOKIE_SECURE = True  # Use True if your site is served over HTTPS
-CSRF_COOKIE_SAMESITE = 'Lax'  # Options are 'Lax', 'Strict', 'None'
+CSRF_COOKIE_SAMESITE = 'None'
 
 
 SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'None'  # If using sessions across domains
 
 TEMPLATES = [
     {
