@@ -47,6 +47,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
+CORS_ALLOW_CREDENTIALS = True
 
 
 
@@ -91,7 +92,12 @@ ROOT_URLCONF = 'portfolio_backend.urls'
 
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 
+CSRF_COOKIE_SECURE = True  # Use True if your site is served over HTTPS
+CSRF_COOKIE_SAMESITE = 'Lax'  # Options are 'Lax', 'Strict', 'None'
 
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'Lax'
 
 TEMPLATES = [
     {
@@ -167,3 +173,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG' if DEBUG else 'INFO',
+    },
+}
