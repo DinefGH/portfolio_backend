@@ -78,6 +78,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'portfolio_backend.urls'
 
 
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
