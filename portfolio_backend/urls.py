@@ -28,5 +28,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('counter.urls')), 
-]+ staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# Serve static and media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Uncomment the following line if you have media files
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
