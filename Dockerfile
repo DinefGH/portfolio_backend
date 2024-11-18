@@ -13,6 +13,12 @@ COPY . /app
 # Install any dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install SQLite3 for direct database inspection if needed
+RUN apt-get update && apt-get install -y sqlite3 && rm -rf /var/lib/apt/lists/*
+
+# Create an empty SQLite database file and set permissions
+RUN touch /app/db.sqlite3 && chmod 666 /app/db.sqlite3
+
 
 # Run Django commands to set up the application
 RUN python manage.py makemigrations
