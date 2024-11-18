@@ -29,11 +29,22 @@ SECRET_KEY = 'django-insecure--1b3r5_(qx=%9to7zw&4pn026_pt7d)+)4f56^iyp!p-_-@(0w
 SECRET_KEY = os.getenv('SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
 
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+
+CSRF_COOKIE_DOMAIN = os.getenv('CSRF_COOKIE_DOMAIN', '')
+
+CSRF_COOKIE_SECURE = True  # Use True if your site is served over HTTPS
+CSRF_COOKIE_SAMESITE = 'None'
+
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'  # If using sessions across domains
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -80,17 +91,6 @@ ROOT_URLCONF = 'portfolio_backend.urls'
 
 
 
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
-
-CSRF_COOKIE_DOMAIN = os.getenv('CSRF_COOKIE_DOMAIN', '').split(',')
-
-
-CSRF_COOKIE_SECURE = True  # Use True if your site is served over HTTPS
-CSRF_COOKIE_SAMESITE = 'None'
-
-
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_SAMESITE = 'None'  # If using sessions across domains
 
 TEMPLATES = [
     {
