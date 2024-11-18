@@ -13,6 +13,13 @@ COPY . /app
 # Install any dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+
+# Run Django commands to set up the application
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+RUN python manage.py collectstatic --noinput
+
+
 # Expose port 8001 for Django or Gunicorn to listen on inside the container
 EXPOSE 8001
 
